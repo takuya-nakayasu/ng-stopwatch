@@ -1,3 +1,8 @@
-<div class="info">
-  <div class="info-child">{{ digitalTimer$ | async }}</div>
+<div>
+  <div>{{ digitalTimer$ | async }}</div>
+  <div>
+    <button (click)="callStart()">START</button>
+    <button (click)="action.stop()">STOP</button>
+    <button (click)="callReset()">RESET</button>
+  </div>
 </div>

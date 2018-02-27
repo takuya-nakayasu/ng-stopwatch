@@ -5,6 +5,7 @@ import { dispatch, NgRedux } from '@angular-redux/store';
 import { IAppState } from './store';
 
 export type VoidAction = FluxStandardAction<void, void>;
+export type StringAction = FluxStandardAction<string, void>;
 
 @Injectable()
 export class TimerActions {
@@ -12,9 +13,9 @@ export class TimerActions {
   static readonly STOP = 'STOP';
   static readonly RESET = 'RESET';
 
-  @dispatch() start = (): VoidAction => ({
+  @dispatch() start = (now: string): StringAction => ({
     type: TimerActions.START,
-    payload: undefined,
+    payload: now,
     meta: undefined
   })
 
