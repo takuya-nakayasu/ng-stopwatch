@@ -2,7 +2,6 @@ import { IAppState } from './store';
 import { Action } from 'redux';
 import { TimerActions,
          VoidAction,
-         StringAction,
         } from './action';
 
 export function rootReducer(
@@ -10,15 +9,20 @@ export function rootReducer(
     action: Action
 ): IAppState {
     switch (action.type) {
-        case TimerActions.START:
+        case TimerActions.COUNT:
             return {
-              digitalTimer: (action as StringAction).payload,
+              time: lastState.time += 1,
               isStop: false,
             };
         case TimerActions.STOP:
             return {
-              digitalTimer: lastState.digitalTimer,
+              time: lastState.time,
               isStop: true,
+            };
+        case TimerActions.RESET:
+            return {
+              time: 0,
+              isStop: false,
             };
             default:
                 return lastState;

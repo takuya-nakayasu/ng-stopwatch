@@ -1,8 +1,11 @@
 <div>
-  <div>{{ digitalTimer$ | async }}</div>
+  <div>{{ (time$ | async) | digitalTimerPipe }}</div>
   <div>
-    <button (click)="callStart()">START</button>
-    <button (click)="action.stop()">STOP</button>
-    <button (click)="callReset()">RESET</button>
+    <button *ngIf="((isStop$ | async) || (time$ | async) === 0) else elseBlock" (click)="countStart()">
+      START</button>
+    <ng-template #elseBlock>
+        <button (click)="action.stop()">STOP</button>
+    </ng-template>
+    <button *ngIf="(isStop$ | async)" (click)="callReset()">RESET</button>
   </div>
 </div>

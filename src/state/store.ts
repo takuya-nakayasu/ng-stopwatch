@@ -2,11 +2,11 @@ import { Action } from 'redux';
 import { TimerActions } from '../state/action';
 
 export interface IAppState {
-    digitalTimer: string;
+    time: number;
     isStop: boolean;
 }
 
 export const INITIAL_STATE: IAppState = {
-    digitalTimer: '0:0:00',
+    time: 0,
     isStop: false,
 };

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { TimerActions } from '../state/action';
 
 import 'rxjs/add/observable/interval';
+import { Subscription } from 'rxjs/Subscription';
+
 
 @Component({
   selector: 'app-root',
@@ -11,9 +13,10 @@ import 'rxjs/add/observable/interval';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @select() readonly digitalTimer$: Observable<number>;
+  @select() readonly time$: Observable<number>;
   @select() readonly isStop$: Observable<boolean>;
 
+  subscription: Subscription;
   isStop: boolean;
 
   constructor(
@@ -24,22 +27,24 @@ export class AppComponent implements OnInit {
     this.isStop$.subscribe(isStop => this.isStop = isStop);
   }
 
-  callStart = (): void => {
-    let time = 0;
+  countStart = (): void => {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
     this.isStop = false;
-    Observable.interval(100).subscribe(
-      () => {
+    this.subscription = Observable.interval(1000)
+      .subscribe(() => {
         if (this.isStop) {
           return;
         }
-        time += 1;
-        this.action
-          .start(`${Math.floor(time / 600)}:${Math.floor((time / 10) % 60)}:${(time % 10)}0`);
-      }
-    );
+        this.action.count();
+      });
   }
 
   callReset = (): void => {
-
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    this.action.reset();
   }
 }
