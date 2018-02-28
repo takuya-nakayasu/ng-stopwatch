@@ -1,11 +1,12 @@
-<div>
-  <div>{{ (time$ | async) | digitalTimerPipe }}</div>
+<div class="timer-box">
+  <h1 class="timer">{{ (time$ | async) | digitalTimerPipe }}</h1>
   <div>
-    <button *ngIf="((isStop$ | async) || (time$ | async) === 0) else elseBlock" (click)="countStart()">
-      START</button>
+    <button *ngIf="((isStop$ | async) || (time$ | async) === 0) else elseBlock"
+    (click)="countStart()" class="start">START</button>
     <ng-template #elseBlock>
-        <button (click)="action.stop()">STOP</button>
+        <button (click)="action.stop()" class="stop">STOP</button>
     </ng-template>
-    <button *ngIf="(isStop$ | async)" (click)="callReset()">RESET</button>
+    <button *ngIf="(isStop$ | async)"
+      (click)="callReset()" class="reset">RESET</button>
   </div>
 </div>
