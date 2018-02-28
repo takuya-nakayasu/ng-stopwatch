@@ -1,7 +1,7 @@
 Angular Stopwatch ([Try It](https://l08084.github.io/ng-stopwatch/))
 =========================================================================
 
-![Angular Stopwatch](resources/ng-stopwatch.gif)
+![Angular Stopwatch](resouces/ng-stopwatch.gif)
 
 Run Things Locally
 ------------------
